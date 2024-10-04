@@ -9,7 +9,10 @@ public class Magasin {
     private int capacite;
 
     private Produit[] ensembleProduit;
-    private  int cpt;
+    private   int cpt;
+
+
+
 
 
     public Magasin(int id , String adresse , int capacite )
@@ -25,10 +28,17 @@ public class Magasin {
 
     public void ajouterProduit(Produit p)
     {
+
+
         if(cpt<capacite)
         {
-            this.ensembleProduit[cpt]=p;
-            cpt++;
+            if(this.chercherProduit(p)) {
+                this.ensembleProduit[cpt] = p;
+                cpt++;
+            }
+            else
+                System.out.println("produit existe");
+
         }
         else
             System.out.println("Magasin complet");
@@ -46,5 +56,16 @@ public class Magasin {
             this.ensembleProduit[i].Afficher();
         }
     }
+
+
+    public Boolean chercherProduit(Produit p) {
+        for (int i = 0; i < cpt; i++) { // Parcours seulement jusqu'au nombre réel de produits ajoutés
+            if (ensembleProduit[i] != null && ensembleProduit[i].Comparer(p)) { // Vérification si le produit n'est pas null
+                return true; // Retourne true dès que le produit est trouvé
+            }
+        }
+        return false;
+    }
+
 
 }
